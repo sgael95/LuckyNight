@@ -24,5 +24,6 @@ public class BlackJackDriver {
 		BlackJackController controller = new BlackJackController(game, view, menu);
 		menu.show(); 
 
+		System.out.println("Game has terminated.");
 	}
 }
