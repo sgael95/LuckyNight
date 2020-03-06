@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 
 public class MainMenuView extends JFrame implements ActionListener {
 	
-	private JFrame menu = new JFrame();;
+	private JFrame menu = new JFrame();
 	private JButton startBtn = new JButton("Start");
 	private JButton settingsBtn = new JButton("Settings");
 	private JButton rulesBtn = new JButton("Rules");
