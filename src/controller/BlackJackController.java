@@ -4,12 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import model2.BlackJackModel;
+/*
 import model.BlackJackCard;
 import model.BlackJackDealer;
 import model.BlackJackModel;
 import model.BlackJackPlayer;
 import model.ImageLoader;
 import model.Player;
+*/
 import view.BlackJackView;
 import view.MainMenuView;
 
@@ -35,24 +38,27 @@ public class BlackJackController implements ActionListener{
 		menu.addRulesListener(new RulesListener());
 		
 		view.addHitListener(new HitListener());
+		view.addQuitListener(new QuitListener());
+		view.addStayListener(new StayListener());
 	}
 
 	
 	private void initialize() {
 		//TO DO later 
 		game.startGame(); //start the game 
-		ArrayList<String> dealerStrings = getDealerHandImageStrings(game.getDealer()); //Get the dealers hand 
+		//ArrayList<String> dealerStrings = getDealerHandImageStrings(game.getDealer()); //Get the dealers hand 
+		ArrayList<String> dealerStrings = game.getDealersHand();
 		
-		
-		assert(game.getPlayers().size() == 1); //Single player mode 
-		ArrayList<String> userStrings = getPlayerHandImageStrings(game.getPlayers().get(0)); // TODO make this better, assumes dealer is last
+		ArrayList<String> userStrings = game.getPlayersHand();
+		//assert(game.getPlayers().size() == 1); //Single player mode 
+		//ArrayList<String> userStrings = getPlayerHandImageStrings(game.getPlayers().get(0)); // TODO make this better, assumes dealer is last
 		
 		view.setDealerCards(dealerStrings); // displaying dealer cards
 		view.setUserCards(userStrings); // displaying player cards
 		
 	}
 	
-
+	/*
 	private ArrayList<String> getDealerHandImageStrings(BlackJackDealer dealer) {
 		ArrayList<String> imageList = new ArrayList<String>(5);
 		for(BlackJackCard card : dealer.getHand().getCards()){
@@ -68,6 +74,7 @@ public class BlackJackController implements ActionListener{
 		}
 		return imageList;
 	}
+	*/
 	
 	
 	@Override
@@ -83,7 +90,25 @@ public class BlackJackController implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			String command = "Hit";
 			game.update(command);
-			//System.out.println("Working");
+			ArrayList<String> userStrings = game.getPlayersHand();
+			view.setUserCards(userStrings);
+		}
+	}
+	
+	class QuitListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			view.clearCards();
+			String command = "Quit";
+			game.update(command);
+		}
+	}
+	
+	class StayListener implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			String command = "Stay";
+			game.update(command);
+			ArrayList<String> dealerStrings = game.getDealersHand();
+			view.setDealerCards(dealerStrings);
 		}
 	}
 	

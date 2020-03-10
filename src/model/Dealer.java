@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Dealer {
+public class Dealer {
 	
 	protected Deck<Card> deck;
 	

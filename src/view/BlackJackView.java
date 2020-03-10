@@ -19,7 +19,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import model.*;
+import model2.*;
 import controller.*;
 
 
@@ -38,6 +38,8 @@ public class BlackJackView extends JFrame {
 	private int userX;
 	private int dealerX;
 	private JButton btnHit = new JButton("Hit");
+	private JButton btnQuit = new JButton("Quit");
+	private JButton btnStay = new JButton("Stay");
 	
 	
 	//constructor
@@ -86,67 +88,96 @@ public class BlackJackView extends JFrame {
 		//Hit Button 
 		btnHit.setBounds(115, 410, 60, 30);
 		btnHit.setBackground(Color.darkGray);
-		//sbtnHit.addActionListener(new hitCard()); //Method not working
 		
 		//Stay Button 
-		JButton btnStand = new JButton("Stay");
-		btnStand.setBounds(215, 410, 60, 30);
-		btnStand.setBackground(Color.darkGray);
+		btnStay.setBounds(215, 410, 60, 30);
+		btnStay.setBackground(Color.darkGray);
 		
 		//Split Button 
-		JButton btnSplit = new JButton("Split");
-		btnSplit.setBounds(315, 410, 60, 30);
-		btnStand.setBackground(Color.darkGray);
+		btnQuit.setBounds(315, 410, 60, 30);
+		btnQuit.setBackground(Color.darkGray);
 		
 		//Adding everything to the frame 
 		frmBlackjack.getContentPane().setLayout(null);
 		frmBlackjack.getContentPane().setBackground(new java.awt.Color(39, 119, 20)); //Pool Felt Green
 		frmBlackjack.getContentPane().add(btnHit);
-		frmBlackjack.getContentPane().add(btnStand);
-		frmBlackjack.getContentPane().add(btnSplit);
+		frmBlackjack.getContentPane().add(btnStay);
+		frmBlackjack.getContentPane().add(btnQuit);
 		
 		//UserUI
 		userPane = new JLayeredPane();
 		userPane.setBorder(new TitledBorder(null, "Your Hand", TitledBorder.LEADING, TitledBorder.TOP, null, Color.white));
-		userPane.setBounds(170, 250, 160, 160);
+		userPane.setBounds(170, 230, 170, 160);
 		userPane.setBackground(new java.awt.Color(49, 49, 52)); //Matted Black 
 		userPane.setOpaque(true);
 		frmBlackjack.getContentPane().add(userPane);
 		
 		//user card 1
-		JLabel lblU = new JLabel("u1");
+		JLabel lblU = new JLabel("");
 		lblU.setBounds(10, 30, 71, 96);
 		userPane.add(lblU, 0);
 		userLabels.add(lblU);
 		
 		//user card 2
-		JLabel lblU_1 = new JLabel("u2");
+		JLabel lblU_1 = new JLabel("");
 		lblU_1.setBounds(30, 30, 71, 96);
 		userPane.add(lblU_1, 0);
 		userLabels.add(lblU_1);
+		
+		JLabel lblU_2 = new JLabel("");
+		lblU_2.setBounds(50, 30, 71, 96);
+		userPane.add(lblU_2, 0);
+		userLabels.add(lblU_2);
+		
+		JLabel lblU_3 = new JLabel("");
+		lblU_3.setBounds(70, 30, 71, 96);
+		userPane.add(lblU_3, 0);
+		userLabels.add(lblU_3);
+		
+		JLabel lblU_4 = new JLabel("");
+		lblU_4.setBounds(90, 30, 71, 96);
+		userPane.add(lblU_4, 0);
+		userLabels.add(lblU_4);
+		
 		
 		userX = 36;
 		
 		//DealerUI 
 		dealerPane = new JLayeredPane();
 		dealerPane.setBorder(new TitledBorder(null, "House Hand", TitledBorder.LEADING, TitledBorder.TOP, null, Color.red));
-		dealerPane.setBounds(170, 40, 160, 160);
+		dealerPane.setBounds(170, 40, 170, 160);
 		dealerPane.setBackground(new java.awt.Color(49, 49, 52)); //Matted Black 
 		dealerPane.setOpaque(true);
 		frmBlackjack.getContentPane().add(dealerPane);
 		
 		
 		//dealer card 1
-		JLabel lblD = new JLabel("d1");
+		JLabel lblD = new JLabel("");
 		lblD.setBounds(10, 37, 71, 96);
 		dealerPane.add(lblD, 0);		
 		dealerLabels.add(lblD);
 		
 		//dealer card 2
-		JLabel lblD_1 = new JLabel("d2");
+		JLabel lblD_1 = new JLabel("");
 		lblD_1.setBounds(30, 37, 71, 96);
 		dealerPane.add(lblD_1, 0);
 		dealerLabels.add(lblD_1);
+		
+		JLabel lblD_2 = new JLabel("");
+		lblD_2.setBounds(50, 37, 71, 96);
+		dealerPane.add(lblD_2, 0);
+		dealerLabels.add(lblD_2);
+		
+		JLabel lblD_3 = new JLabel("");
+		lblD_3.setBounds(70, 37, 71, 96);
+		dealerPane.add(lblD_3, 0);
+		dealerLabels.add(lblD_3);
+		
+		JLabel lblD_4 = new JLabel("");
+		lblD_4.setBounds(90, 37, 71, 96);
+		dealerPane.add(lblD_4, 0);
+		dealerLabels.add(lblD_4);
+		
 		
 		dealerX = 36;
 		
@@ -165,6 +196,23 @@ public class BlackJackView extends JFrame {
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mnGame.add(mntmQuit);	
 		mntmQuit.addActionListener(new exitApp());
+	}
+	
+	public void clearCards() {
+		int count = 0;
+		for(JLabel c : dealerLabels) {
+			JLabel label = dealerLabels.get(count);
+			label.setIcon(null);
+			label.revalidate();
+			label.repaint();
+			
+			JLabel label2 = userLabels.get(count);
+			label2.setIcon(null);
+			label2.revalidate();
+			label2.repaint();
+			
+			count++;
+		}
 	}
 	
 	/**
@@ -245,16 +293,17 @@ public class BlackJackView extends JFrame {
         }
     }
     
-    //Not implemented correctly need to revise 
-    static class hitCard extends BlackJackModel implements ActionListener{
-    	public void actionPerformed(ActionEvent e) {
-    		new BlackJackModel();
-            
-    	}
-    }
     
     public void addHitListener(ActionListener hit){
     	btnHit.addActionListener(hit);
+    }
+    
+    public void addQuitListener(ActionListener quit) {
+    	btnQuit.addActionListener(quit);
+    }
+    
+    public void addStayListener(ActionListener stay) {
+    	btnStay.addActionListener(stay);
     }
 
 }

@@ -2,12 +2,13 @@ package blackjack;
 
 import javax.swing.*;
 import controller.BlackJackController;
+import model2.BlackJackModel;
 import view.BlackJackView;
-import model.BlackJackModel;
+//import model.BlackJackModel;
 import view.MainMenuView;
 
 public class BlackJackDriver {
-
+	
 	public static void main(String[] args) {
 		
 		//Catch error and display message in case game does not want to start to help debug
@@ -23,7 +24,7 @@ public class BlackJackDriver {
 		BlackJackView view = new BlackJackView();
 		BlackJackController controller = new BlackJackController(game, view, menu);
 		menu.show(); 
-
-		System.out.println("Game has terminated.");
+		
+		
 	}
 }

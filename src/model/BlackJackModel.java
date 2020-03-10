@@ -128,6 +128,7 @@ public class BlackJackModel implements CardGame{
 	
 	//method for getting all players
 	public ArrayList<Player> getPlayers(){
+		System.out.println(players);
 		return players;
 	}
 	
@@ -159,14 +160,14 @@ public class BlackJackModel implements CardGame{
 				dealer.dealCard();
 				playerCard = (BlackJackCard) dealer.dealCard();
 				playerCard.setFaceUp();
+				System.out.println(playerCard.value());
+				System.out.println(currentPlayer.getPlayerType());
 				currentPlayer.takeCard(playerCard);
 				for(Player player: players) {
 					playerCard = (BlackJackCard) dealer.dealCard();
 					playerCard.setFaceUp();
 					player.takeCard(playerCard);
 				}
-				System.out.println("A's Hearts");
-				System.out.println("Continue game using imagination.");
 		}
 		
 		if(command.equals("stand")) {
@@ -176,6 +177,7 @@ public class BlackJackModel implements CardGame{
 		
 		//Whatever is pressed next player will then be their turn 
 		currentPlayer = getNextPlayer();
+		System.out.println(currentPlayer.getPlayerType());
 	}
 	
 	

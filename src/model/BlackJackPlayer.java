@@ -10,7 +10,7 @@ public class BlackJackPlayer implements Player {
 	@Override
 	public boolean canHit() {
 		boolean canHit = false;
-		if(!hand.busted() && !hand.is21()){
+		if(!(hand.busted()) && !(hand.is21())){
 			canHit = true;
 		}
 		return canHit;
