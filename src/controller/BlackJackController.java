@@ -24,6 +24,7 @@ public class BlackJackController implements ActionListener{
 	private BlackJackView view; 
 	private BlackJackModel game; 
 	private MainMenuView menu;
+	private boolean gameOver = false;
 	
 	
 	
@@ -82,14 +83,14 @@ public class BlackJackController implements ActionListener{
 		// insert everything 
 		String command = e.getActionCommand();
 		//update method not created yet 
-		game.update(command);
+		gameOver = game.update(command);
 		
 	}
 	
 	class HitListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			String command = "Hit";
-			game.update(command);
+			gameOver = game.update(command);
 			ArrayList<String> userStrings = game.getPlayersHand();
 			view.setUserCards(userStrings);
 		}
@@ -99,16 +100,20 @@ public class BlackJackController implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			view.clearCards();
 			String command = "Quit";
-			game.update(command);
+			gameOver = game.update(command);
 		}
 	}
 	
 	class StayListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			String command = "Stay";
-			game.update(command);
+			gameOver = game.update(command);
 			ArrayList<String> dealerStrings = game.getDealersHand();
 			view.setDealerCards(dealerStrings);
+			if(gameOver) {
+				int player = game.getCurrentPlayer();
+				view.setWinner(player);
+			}
 		}
 	}
 	
@@ -137,5 +142,8 @@ public class BlackJackController implements ActionListener{
 			
 		}
 	}
+	
+	public boolean getGameStat() {return gameOver;}
+	public void setGameStat(boolean gameOver) {this.gameOver = gameOver;}
 
 }

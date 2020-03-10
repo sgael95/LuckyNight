@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -40,7 +41,7 @@ public class BlackJackView extends JFrame {
 	private JButton btnHit = new JButton("Hit");
 	private JButton btnQuit = new JButton("Quit");
 	private JButton btnStay = new JButton("Stay");
-	
+	private JLabel result = new JLabel("");
 	
 	//constructor
 	public BlackJackView(BlackJackModel model, BlackJackController controller) { 
@@ -97,12 +98,17 @@ public class BlackJackView extends JFrame {
 		btnQuit.setBounds(315, 410, 60, 30);
 		btnQuit.setBackground(Color.darkGray);
 		
+		result.setBounds(230, 190, 80, 50);
+		result.setFont(new Font("Serif", Font.BOLD, 12));
+		result.setForeground(Color.WHITE);
+		
 		//Adding everything to the frame 
 		frmBlackjack.getContentPane().setLayout(null);
 		frmBlackjack.getContentPane().setBackground(new java.awt.Color(39, 119, 20)); //Pool Felt Green
 		frmBlackjack.getContentPane().add(btnHit);
 		frmBlackjack.getContentPane().add(btnStay);
 		frmBlackjack.getContentPane().add(btnQuit);
+		frmBlackjack.getContentPane().add(result);
 		
 		//UserUI
 		userPane = new JLayeredPane();
@@ -213,6 +219,16 @@ public class BlackJackView extends JFrame {
 			
 			count++;
 		}
+	}
+	
+	public void setWinner(int winner) {
+		if(winner == 0) {
+			result.setText("PLayer Wins !!!");
+		} else {
+			result.setText("Dealer Wins ! :/ ");
+		}
+		result.revalidate();
+		result.getIgnoreRepaint();
 	}
 	
 	/**

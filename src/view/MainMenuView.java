@@ -58,7 +58,7 @@ public class MainMenuView extends JFrame implements ActionListener {
 		rulesBtn.setBounds(215, 400, 90, 30);
 		rulesBtn.setBackground(Color.darkGray);
 		
-		welcomeMessage.setBounds(185, 100, 300, 100);
+		welcomeMessage.setBounds(200, 100, 300, 100);
 		welcomeMessage.setVisible(true);
 		
 		menu.getContentPane().setLayout(null);
